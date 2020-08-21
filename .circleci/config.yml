@@ -11,7 +11,7 @@ jobs:
           name: Show current branch
           command:  echo ${CURRENT_BRANCH}
       - restore_cache:
-          key:
+          keys:
             - app-{{ checksum "package.json" }}
             - app-
       - run:
@@ -100,7 +100,7 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-      - deploy-to-aws-s3
+      - deploy-to-aws-s3:
           requires:
             - build
           filters:
@@ -109,7 +109,7 @@ workflows:
                 - develop
                 - staging
                 - master
-      - deploy-to-aws-cloudfront
+      - deploy-to-aws-cloudfront:
           requires:
             - deploy-to-aws-s3
           filters:
