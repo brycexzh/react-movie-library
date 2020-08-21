@@ -14,6 +14,9 @@ jobs:
           key:
             - app-{{ checksum "package.json" }}
             - app-
+      - run:
+          name: Install dependencies
+          command: npm install
       - save_cache:
           paths:
             - node_modules
