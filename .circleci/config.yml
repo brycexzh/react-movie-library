@@ -51,7 +51,7 @@ jobs:
           command:  |
             if [ "${CURRENT_BRANCH}" == "master" ]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_PRODUCTION_BUCKET} --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${REACT_PRODUCTION_BUCKET} --delete
             elif [ "${CURRENT_BRANCH}" == "staging" ]
             then
               aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_STAGING_BUCKET} --delete
@@ -92,9 +92,9 @@ jobs:
               aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --path /\*
             elif [ "${CURRENT_BRANCH}" == "staging" ]
             then
-              aws cloudfront create-invalidation --distribution-id ${PRODUCTION_STAGING_ID} --path /\*
+              aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --path /\*
             else
-              aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DEV_ID} --path /\*
+              aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --path /\*
             fi
 workflows:
   build_and_deploy:
