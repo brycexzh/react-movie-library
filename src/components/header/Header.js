@@ -45,6 +45,7 @@ const Header = () => {
       document.body.classList.remove('header-nav-open');
     }
   };
+
   return (
     <>
       <div className="header-nav-wrapper">
