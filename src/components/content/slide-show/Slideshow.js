@@ -1,19 +1,19 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import './Slideshow.scss';
 
-export const Slideshow = (props) => {
-  const { images, auto } = props;
+const Slideshow = (props) => {
+  const { images, auto, showArrows } = props;
   const [state, setState] = useState({
-    sldeShow: images[0],
+    slideShow: images[0],
     slideIndex: 0
   });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sliderInterval, setSliderInterval] = useState(0);
 
   const { slideShow, slideIndex } = state;
-  let currentSlideIndex = 1;
+  let currentSlideIndex = 0;
 
   useEffect(() => {
     if (auto) {
@@ -27,19 +27,19 @@ export const Slideshow = (props) => {
         clearInterval(sliderInterval);
       };
     }
+
+    // eslint-disable-next-line
   }, []);
 
   const autoMoveSlide = () => {
     let lastIndex = 0;
     lastIndex = currentSlideIndex + 1;
     currentSlideIndex = lastIndex >= images.length ? 0 : lastIndex;
-    setState((prev) => (
-      {
-        ...prev,
-        slideIndex: currentSlideIndex,
-        slideShow: images[currentSlideIndex]
-      }
-    ));
+    setState((prev) => ({
+      ...prev,
+      slideIndex: currentSlideIndex,
+      slideShow: images[currentSlideIndex]
+    }));
   };
 
   const moveSlideWithArrows = (type) => {
@@ -58,22 +58,25 @@ export const Slideshow = (props) => {
         index = 0;
       }
     }
-
     setCurrentIndex(index);
-    setState((prev) => (
-      {
-        ...prev,
-        slideIndex: index,
-        slideShow: images[index]
-      }
-    ));
+    setState((prev) => ({
+      ...prev,
+      slideIndex: index,
+      slideShow: images[index]
+    }));
   };
 
   const RenderArrows = () => {
     return (
       <div className="slider-arrows">
-        <div className="slider-arrow slider-arrow--left" onClick={() => moveSlideWithArrows('prev')} />
-        <div className="slider-arrow slider-arrow--right" onClick={() => moveSlideWithArrows('next')} />
+        <div
+          className="slider-arrow slider-arrow--left"
+          onClick={() => moveSlideWithArrows('prev')}
+        />
+        <div
+          className="slider-arrow slider-arrow--right"
+          onClick={() => moveSlideWithArrows('next')}
+        />
       </div>
     );
   };
@@ -81,30 +84,36 @@ export const Slideshow = (props) => {
   const Indicators = (props) => {
     const { currentSlide } = props;
     const listIndicators = images.map((slide, i) => {
-      const buttonClass = i === currentSlide ? 'slider-navButton slider-navButton--active' : 'slider-navButton';
-      return <button className={buttonClass} key={i} />;
+      const btnClasses =
+        i === currentSlide ? 'slider-navButton slider-navButton--active' : 'slider-navButton';
+      return <button className={btnClasses} key={i} />;
     });
-    return <div className="slider-nav" >{listIndicators}</div>;
+    return <div className="slider-nav">{listIndicators}</div>;
   };
 
   return (
     <>
       <div className="slider">
         <div className="slider-slides">
-          {
-            images && images.length && slideShow && (
-              <div
-                className="slider-image"
-                style={{ backgroundImage: `url(${slideShow.url})` }}
-              ></div>
-            )
-          }
+          {images && images.length && slideShow && (
+            <div
+              className="slider-image"
+              style={{ backgroundImage: `url(${slideShow.url})` }}
+            ></div>
+          )}
         </div>
-        <Indicators currentSlide={slideIndex}/>
-        <RenderArrows />
+        <Indicators currentSlide={slideIndex} />
+        {showArrows ? <RenderArrows /> : null}
       </div>
     </>
   );
+};
+
+Slideshow.propTypes = {
+  images: PropTypes.array.isRequired,
+  auto: PropTypes.bool.isRequired,
+  showArrows: PropTypes.bool.isRequired,
+  currentSlide: PropTypes.number
 };
 
 export default Slideshow;
