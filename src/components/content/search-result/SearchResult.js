@@ -48,7 +48,7 @@ const SearchResult = (props) => {
                 <div className="grid-detail">
                   <span className="grid-detail-title">{data.title}</span>
                   <div className="grid-detail-rating">
-                    <Rating rating={data.vote_average} totalStars={10} />
+                    <Rating rating={data.vote_average} totalStars={5} />
                     &nbsp;&nbsp;
                     <div className="grid-vote-average">{data.vote_average}</div>
                   </div>
