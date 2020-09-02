@@ -129,7 +129,7 @@ const Slideshow = (props) => {
                 <text textAnchor="middle" x="50%" y="50%" className="text text-4">
                   LIBRARY
                 </text>
-              </svg
+              </svg>
             </div>
           )}
         </div>
