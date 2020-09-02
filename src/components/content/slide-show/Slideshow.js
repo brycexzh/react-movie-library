@@ -101,12 +101,25 @@ const Slideshow = (props) => {
       <div className="slider">
         <div className="slider-slides">
           {images && images.length && slideShow && (
-            <div
-              className="slider-image"
-              style={{ backgroundImage: `url(${slideShow.url})` }}
-            ></div>
+            <div className="slider-image" style={{ backgroundImage: `url(${slideShow.url})` }}>
+              <svg width="100%" height="200">
+                <text textAnchor="middle" x="50%" y="50%" className="text text-1">
+                  MOVIE LIBRARY
+                </text>
+                <text textAnchor="middle" x="50%" y="50%" className="text text-2">
+                  MOVIE LIBRARY
+                </text>
+                <text textAnchor="middle" x="50%" y="50%" className="text text-3">
+                  MOVIE LIBRARY
+                </text>
+                <text textAnchor="middle" x="50%" y="50%" className="text text-4">
+                  MOVIE LIBRARY
+                </text>
+              </svg>
+            </div>
           )}
         </div>
+
         <Indicators currentSlide={slideIndex} />
         {showArrows ? <RenderArrows /> : null}
       </div>
