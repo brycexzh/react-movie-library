@@ -5,6 +5,7 @@ import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 
 import './Header.scss';
 import logo from '../../assets/logo.png';
+import logoGithub from '../../assets/github-logo.svg';
 import {
   getMovies,
   setMovieType,
@@ -140,6 +141,11 @@ const Header = (props) => {
     history.push('/');
   };
 
+  const navigateToGithubPage = () => {
+    const w = window.open('about:blank');
+    w.location.href = 'https://github.com/brycexzh/react-movie-library/tree/master';
+  };
+
   const toggleMenu = () => {
     menuClass = !menuClass;
     navClass = !navClass;
@@ -160,6 +166,9 @@ const Header = (props) => {
           <div className="header-navbar">
             <div className="header-image" onClick={() => navigateToMainPage()}>
               <img src={logo} alt="" />
+            </div>
+            <div className="header-image-github" onClick={() => navigateToGithubPage()}>
+              <img src={logoGithub} alt="" />
             </div>
             <div
               className={`${menuClass ? 'header-menu-toggle is-active' : 'header-menu-toggle'}`}
