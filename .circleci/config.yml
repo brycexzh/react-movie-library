@@ -163,6 +163,12 @@ workflows:
           requires:
             - prettier
             - linting
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
       - deploy-to-aws-s3:
           requires:
             - unit-test
