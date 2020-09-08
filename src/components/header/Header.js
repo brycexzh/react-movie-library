@@ -143,7 +143,7 @@ const Header = (props) => {
 
   const navigateToGithubPage = () => {
     const w = window.open('about:blank');
-    w.location.href = 'https://github.com/brycexzh/react-movie-library/tree/master';
+    w.location.href = 'https://brycexzh.github.io/Bryce_Portfolio/';
   };
 
   const toggleMenu = () => {
